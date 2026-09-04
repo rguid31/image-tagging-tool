@@ -1,7 +1,5 @@
-openai # For generating descriptions.
-torch # For using OpenAI’s CLIP model.
-transformers # For text/image processing.
-pillow # For handling images.
-python-dotenv # For loading .env variables.
-selenium # For automating Unsplash uploads.
-webdriver-manager # For managing Chrome WebDriver.
+openai
+python-dotenv
+pillow
+torch
+transformers
