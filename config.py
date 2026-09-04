@@ -1,24 +1,20 @@
 import os
+
 from dotenv import load_dotenv
+from transformers import CLIPModel, CLIPProcessor
 
-import openai
-from transformers import CLIPProcessor, CLIPModel
-
-# Load environment variables from .env file
 load_dotenv()
 
-# Retrieve OpenAI API Key
-openai.api_key = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+if not OPENAI_API_KEY:
+    raise ValueError(
+        "OPENAI_API_KEY is not set. Copy .env.example to .env and add your API key."
+    )
 
-# Validate API Key
-if not openai.api_key:
-    raise ValueError("API key not found. Please set the OPENAI_API_KEY in the .env file.")
+CLIP_MODEL_NAME = "openai/clip-vit-base-patch32"
 
-# Load CLIP Model and Processor
 try:
-    model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
-    processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
-except Exception as e:
-    raise RuntimeError(f"Error loading CLIP model: {e}")
-
-print("✅ Configuration loaded successfully.")
+    model = CLIPModel.from_pretrained(CLIP_MODEL_NAME)
+    processor = CLIPProcessor.from_pretrained(CLIP_MODEL_NAME)
+except Exception as exc:
+    raise RuntimeError(f"Unable to load CLIP model '{CLIP_MODEL_NAME}': {exc}") from exc
