@@ -1,13 +1,23 @@
-.# Ignore Python virtual environment
+# Virtual environments
 .venv/
+venv/
 
-# Ignore API keys & environment variables
+# Environment variables
 .env
+.env.*
+!.env.example
 
-# Ignore system files
-.DS_Store
+# Generated output
+image_metadata.json
 
-# Ignore compiled files
+# Python cache / build artifacts
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# IDE / OS files
+.DS_Store
+.idea/
+.vscode/
